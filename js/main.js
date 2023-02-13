@@ -1,3 +1,17 @@
+let productos = [];
+
+fetch("../js/productos.json")
+    .then(response => response.json())
+    .then(data => {
+        console.log(data)
+
+        productos = data;
+        console.log(productos)
+
+        addProducts(productos);
+        
+    })
+
 const containerProducts = document.querySelector("#container-productos");
 const buttonSelect = document.querySelectorAll(".boton-categoria");
 const title = document.querySelector(".titulo-principal");
@@ -27,7 +41,6 @@ function addProducts(productSelect){
     addingButtons()   
      
 }
-addProducts(productos);
 
 
 buttonSelect.forEach(boton => {       /* creamos funcion de categorias de los botones para que cada click nos traiga los productos por categoria y id del html*/
