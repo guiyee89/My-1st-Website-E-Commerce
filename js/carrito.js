@@ -88,6 +88,24 @@ function deleteProduct(e) {
 
   localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
   console.log(cart)
+
+  Toastify({
+    text: "Deleted",
+    offset: {
+        x: 50, 
+        y: 80, 
+      },
+    duration: 3000,
+    close: true,
+    gravity: "bottom", 
+    position: "left", 
+    stopOnFocus: true, 
+    style: {
+      background: "linear-gradient(to left, #000, #2e2c2c)",
+      borderRadius: "1rem",
+    },
+    onClick: function(){} 
+  }).showToast();
 }
 
 
@@ -95,9 +113,22 @@ emptyButton.addEventListener("click", vaciarCarrito);
 
 function vaciarCarrito() {
 
-  cart.length= 0;
-   localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
-   addToCart()
+  Swal.fire({
+    title: 'Are you sure?',
+    text: "You are going to delete all selected products!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Empty cart'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      cart.length= 0;
+      localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
+      addToCart()
+    }
+  })
+
 }
 
 function caclTotal(){
@@ -107,17 +138,35 @@ function caclTotal(){
 
 buy.addEventListener("click", buyProducts);
 function buyProducts() {
+  Swal.fire({
+    title: 'Do you confirm your purchase?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Confirm'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        position: 'mid',
+        icon: 'success',
+        title: 'Your purchase is Completed',
+        showConfirmButton: false,
+        timer: 2500
+      })
 
-   cart.length= 0;
-   localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
+      cart.length= 0;
+      localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
    
-    empty.classList.add("disabled");
-    product.classList.add("disabled");
-    actions.classList.add("disabled");
-    bought.classList.remove("disabled");
+      empty.classList.add("disabled");
+      product.classList.add("disabled");
+      actions.classList.add("disabled");
+      bought.classList.remove("disabled");
 
-    product.innerHTML = "";
-    actions.innerHTML = "";
+      product.innerHTML = "";
+      actions.innerHTML = "";
+    }
+  })
 }
 
 

@@ -2,12 +2,8 @@ let productos = [];
 
 fetch("../js/productos.json")
     .then(response => response.json())
-    .then(data => {
-        console.log(data)
-
-        productos = data;
-        console.log(productos)
-
+    .then(data => {   
+        productos = data
         addProducts(productos);
         
     })
@@ -21,11 +17,11 @@ const cartNumber = document.querySelector("#numerito");
 
 function addProducts(productSelect){
     
-    containerProducts.innerHTML = ""; /* para que se muestre vacio, y luego solo ejecute las categorias en cada boton */
+    containerProducts.innerHTML = ""; 
 
     productSelect.forEach(producto => {
 
-        const div = document.createElement("div"); /* toda esta construccion es para emular el contenido de productos del html hacia el JS */
+        const div = document.createElement("div"); 
         div.classList.add("producto");
         div.innerHTML = `
         <img class="producto-imagen" src="${producto.img}" alt="${producto.title}">
@@ -43,14 +39,14 @@ function addProducts(productSelect){
 }
 
 
-buttonSelect.forEach(boton => {       /* creamos funcion de categorias de los botones para que cada click nos traiga los productos por categoria y id del html*/
+buttonSelect.forEach(boton => {       
     boton.addEventListener("click", (e) => {     
         
-        buttonSelect.forEach(boton => boton.classList.remove("active"))     /* por cada click, se cambia la solapa active */
+        buttonSelect.forEach(boton => boton.classList.remove("active"))     
 
         e.currentTarget.classList.add("active")  
 
-        if(e.currentTarget.id != "all") {    /* "todos" por el id que dimos en html */
+        if(e.currentTarget.id != "all") {    
         const productCat = productos.find(producto => producto.cat.id === e.currentTarget.id);
         title.innerText = productCat.cat.name;
         const buttonProduct = productos.filter(producto => producto.cat.id === e.currentTarget.id) ;
@@ -64,7 +60,7 @@ buttonSelect.forEach(boton => {       /* creamos funcion de categorias de los bo
 });
 
 
-function addingButtons(){  /* botones para agregar objetos al carrito */
+function addingButtons(){  
     addButton = document.querySelectorAll(".producto-agregar");
 
     addButton.forEach(boton => {
@@ -93,16 +89,33 @@ function addCart(e){
     
 
 
-    if(cart.some(producto => producto.id === id)) {  // .some nos devuelve true or false.. /* necesitamos identificar si X producto ya esta en el carrito, si es asi, sumar cantidad del mismo producto en vez de agregar 2 veces el mismo objeto entero */
-        const index = cart.findIndex(producto => producto.id === id); /* buscamos el index de la propiedad que queremos sumar */
-        cart[index].quantity++;                                            /* y le sumamos en cada eleccion */
+    if(cart.some(producto => producto.id === id)) {  
+        const index = cart.findIndex(producto => producto.id === id); 
+        cart[index].quantity++;                                            
     } else {
-        addedProduct.quantity = 1;  /* creamos la propiedad Cantidad en el array dado q no existia */
+        addedProduct.quantity = 1;  
         cart.push(addedProduct)
     }
     addQuantity()
-
     localStorage.setItem("productos-en-carrito", JSON.stringify(cart))
+
+    Toastify({
+        text: "Added to Cart",
+        offset: {
+            x: 50, 
+            y: 80, 
+          },
+        duration: 3000,
+        close: true,
+        gravity: "bottom", 
+        position: "left", 
+        stopOnFocus: true, 
+        style: {
+          background: "linear-gradient(to left, #000, #2e2c2c)",
+          borderRadius: "1rem",
+        },
+        onClick: function(){} 
+      }).showToast();
 }
 
 function addQuantity(){
