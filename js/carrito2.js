@@ -71,7 +71,6 @@ addToCart();
 
 
 function newDeleteButton() {
-  /* botones para agregar objetos al carrito */
   deleteButton = document.querySelectorAll(".carrito-producto-eliminar");
 
   deleteButton.forEach((boton) => {
