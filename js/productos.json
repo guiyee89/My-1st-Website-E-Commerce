@@ -62,7 +62,7 @@
     },
     {
         "id": "servicio-03",
-        "title": "Plan your trip",
+        "title": "Planning your trip",
         "img": "../image/servicio3.jpg",
         "price": 40,
         "cat": {

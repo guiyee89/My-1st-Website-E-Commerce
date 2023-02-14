@@ -72,7 +72,7 @@ function addingButtons(){
 
 let cart;
 
-let cartLS = localStorage.getItem("productos-en-carrito");
+let cartLS = localStorage.getItem("productos-en-cart");
 
 if(cartLS){
     cart = JSON.parse(cartLS);
@@ -97,7 +97,7 @@ function addCart(e){
         cart.push(addedProduct)
     }
     addQuantity()
-    localStorage.setItem("productos-en-carrito", JSON.stringify(cart))
+    localStorage.setItem("productos-en-cart", JSON.stringify(cart))
 
     Toastify({
         text: "Added to Cart",

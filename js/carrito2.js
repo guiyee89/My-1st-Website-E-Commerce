@@ -1,4 +1,4 @@
-let cart = localStorage.getItem("productos-en-carrito");
+let cart = localStorage.getItem("productos-en-cart");
 cart = JSON.parse(cart);
 
 const empty = document.querySelector("#carrito-vacio");
@@ -41,7 +41,7 @@ function addToCart() {
 
               <div class="carrito-producto-precio">
                 <small>Price</small>
-                <p>${producto.price}</p>
+                <p>$${producto.price}</p>
               </div>
 
               <div class="carrito-producto-subtotal">
@@ -49,7 +49,7 @@ function addToCart() {
                 <p>${producto.price * producto.quantity}</p>
               </div>
 
-              <button class="carrito-producto-eliminar" id="${producto.id}">
+              <button class="carrito-producto-eliminar" id="$${producto.id}">
                 <i class="bi bi-trash-fill"></i>
               </button>
         `;
@@ -86,7 +86,7 @@ function deleteProduct(e) {
   cart.splice(index, 1);
   addToCart();
 
-  localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
+  localStorage.setItem("productos-en-cart", JSON.stringify(cart));
   console.log(cart)
 
   Toastify({
@@ -124,7 +124,7 @@ function vaciarCarrito() {
   }).then((result) => {
     if (result.isConfirmed) {
       cart.length= 0;
-      localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
+      localStorage.setItem("productos-en-cart", JSON.stringify(cart));
       addToCart()
     }
   })
@@ -156,7 +156,7 @@ function buyProducts() {
       })
 
       cart.length= 0;
-      localStorage.setItem("productos-en-carrito", JSON.stringify(cart));
+      localStorage.setItem("productos-en-cart", JSON.stringify(cart));
    
       empty.classList.add("disabled");
       product.classList.add("disabled");
