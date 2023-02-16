@@ -11,9 +11,16 @@ fetch("../js/productos.json")
 const containerProducts = document.querySelector("#container-productos");
 const buttonSelect = document.querySelectorAll(".boton-categoria");
 const title = document.querySelector(".titulo-principal");
-
 const cartNumber = document.querySelector("#numerito");
+let cart;
+let cartLS = localStorage.getItem("productos-en-cart");
 
+if(cartLS){
+    cart = JSON.parse(cartLS);
+    addQuantity()
+} else {
+    cart = [];
+}
 
 function addProducts(productSelect){
     
@@ -68,20 +75,6 @@ function addingButtons(){
     })
     
 }
-
-
-let cart;
-
-let cartLS = localStorage.getItem("productos-en-cart");
-
-if(cartLS){
-    cart = JSON.parse(cartLS);
-    addQuantity()
-} else {
-    cart = [];
-}
-
-
 
 function addCart(e){
     const id = e.currentTarget.id;
