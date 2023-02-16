@@ -28,7 +28,7 @@ function addToCart() {
       const div = document.createElement("div");
       div.classList.add("carrito-producto");
       div.innerHTML = `
-              <img  src="${producto.img}" alt="${producto.title}" />
+              <img  src="${producto.img[0]}" alt="${producto.title}" />
               <div class="carrito-producto-titulo">
                 <small>Item</small>
                 <h3>${producto.title}</h3>

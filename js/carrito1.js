@@ -1,71 +1,89 @@
-let productos = [];
 
-fetch("../js/productos.json")
-    .then(response => response.json())
-    .then(data => {   
-        productos = data
-        addProducts(productos);
-        
-    })
+let productos = [];
+let servicios = [];
+fetch("../js/products.json")
+    .then((response) => response.json())
+    .then((data) => {
+        productos = data.travel
+        servicios = data.services
+
+        addProducts(productos, servicios);
+    });
 
 const containerProducts = document.querySelector("#container-productos");
 const buttonSelect = document.querySelectorAll(".boton-categoria");
 const title = document.querySelector(".titulo-principal");
 const cartNumber = document.querySelector("#numerito");
-let cart;
+
+let cart
 let cartLS = localStorage.getItem("productos-en-cart");
 
-if(cartLS){
+if (cartLS) {
     cart = JSON.parse(cartLS);
     addQuantity()
 } else {
     cart = [];
 }
 
-function addProducts(productSelect){
-    
-    containerProducts.innerHTML = ""; 
+function addProducts(productSelect, serviceSelect) {
+    containerProducts.innerHTML = "";
 
-    productSelect.forEach(producto => {
-
-        const div = document.createElement("div"); 
+    productSelect.forEach((producto) => {
+        const div = document.createElement("div");
         div.classList.add("producto");
         div.innerHTML = `
-        <img class="producto-imagen" src="${producto.img}" alt="${producto.title}">
-        <div class="producto-detalles">
-            <h3 class="producto-titulo">${producto.title}</h3>
-            <p class="producto-precio">$${producto.price}</p>
-            <button class="producto-agregar" id="${producto.id}"><span class="button_top">Add to Cart</span></button>
-        </div>
-        `;
-
+      <img class="producto-imagen" src="${producto.img[0]}" alt="${producto.title}">
+      <div class="producto-detalles">
+        <h3 class="producto-titulo">${producto.title}</h3>
+        <p class="producto-precio">$${producto.price}</p>
+        <button class="producto-agregar" id="${producto.id}"><span class="button_top">Add to Cart</span></button>
+      </div>
+    `;
         containerProducts.append(div);
-    })
-    addingButtons()   
-     
+    });
+    serviceSelect.forEach((servicio) => {
+        const div = document.createElement("div");
+        div.classList.add("producto");
+        div.innerHTML = `
+          <img class="producto-imagen" src="${servicio.img[0]}" alt="${servicio.title}">
+          <div class="producto-detalles">
+            <h3 class="producto-titulo">${servicio.title}</h3>
+            <p class="producto-precio">$${servicio.price}</p>
+            <button class="producto-agregar" id="${servicio.id}"><span class="button_top">Add to Cart</span></button>
+          </div>
+        `;
+        containerProducts.append(div);
+      });
+
+    addingButtons();
 }
 
 
-buttonSelect.forEach(boton => {       
-    boton.addEventListener("click", (e) => {     
-        
-        buttonSelect.forEach(boton => boton.classList.remove("active"))     
+buttonSelect.forEach(boton => {
+    boton.addEventListener("click", (e) => {
+      buttonSelect.forEach(boton => boton.classList.remove("active"))
 
-        e.currentTarget.classList.add("active")  
+      e.currentTarget.classList.add("active")
 
-        if(e.currentTarget.id != "all") {    
-        const productCat = productos.find(producto => producto.cat.id === e.currentTarget.id);
-        title.innerText = productCat.cat.name;
-        const buttonProduct = productos.filter(producto => producto.cat.id === e.currentTarget.id) ;
-        addProducts(buttonProduct);
+      if (e.currentTarget.id !== "all") {     
+        const productTravel = productos.find(producto =>  producto.cat.id === e.currentTarget.id);
+        const productService = servicios.find(servicio =>  servicio.cat.id === e.currentTarget.id);
 
-        }else {
-            title.innerText = "All our products"
-            addProducts(productos);
+        if (productTravel) {
+          title.innerText = productTravel.cat.id;
+          const buttonProduct = productos.filter(producto => producto.cat.id === e.currentTarget.id);
+          addProducts(buttonProduct, []);
+        } else if (productService) {
+          title.innerText = productService.cat.id;
+          const buttonService = servicios.filter(servicio => servicio.cat.id === e.currentTarget.id);
+          addProducts(buttonService, []);
         }
+      } else {
+        title.innerText = "All our products"
+        addProducts(productos, servicios);
+      }
     })
-});
-
+  });
 
 function addingButtons(){  
     addButton = document.querySelectorAll(".producto-agregar");
@@ -73,22 +91,33 @@ function addingButtons(){
     addButton.forEach(boton => {
         boton.addEventListener("click", addCart)
     })
-    
+
+}
+if(cartLS){
+    cart = JSON.parse(cartLS);
+    addQuantity()
+} else {
+    cart = [];
 }
 
 function addCart(e){
     const id = e.currentTarget.id;
     const addedProduct = productos.find(producto => producto.id === id)
-    
-
+    const addedService = servicios.find(servicio => servicio.id === id)
 
     if(cart.some(producto => producto.id === id)) {  
         const index = cart.findIndex(producto => producto.id === id); 
         cart[index].quantity++;                                            
     } else {
-        addedProduct.quantity = 1;  
-        cart.push(addedProduct)
+        if (addedProduct) {
+            addedProduct.quantity = 1;
+            cart.push(addedProduct);
+        } else if (addedService) {
+            addedService.quantity = 1;
+            cart.push(addedService);
+        }
     }
+
     addQuantity()
     localStorage.setItem("productos-en-cart", JSON.stringify(cart))
 
@@ -111,8 +140,9 @@ function addCart(e){
       }).showToast();
 }
 
+
 function addQuantity(){
+    
     let num = cart.reduce((acc, prod) => acc + prod.quantity, 0);
     cartNumber.innerText = num;
-
 }
