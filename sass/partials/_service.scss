@@ -9,7 +9,7 @@
     margin: 20px 85px;
     display: grid;
     gap: 1.5rem;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
     text-align: center;
     padding: 0px 50px;
 
@@ -23,7 +23,9 @@
     }
     
     .grid_service_col_1{
-        grid-column: span 4;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
 
         img{
             width: 450px;
@@ -31,20 +33,29 @@
         }
 
         div{
+            padding: 10px;
             p{
-                padding: 20px 225px;
+                padding: 20px 50px;
             }  
         }
-        a{
-            button{
-                @extend %button;
-                margin-bottom: 15px;
+        
+        button{
+                    
+            @extend %button;
 
-                .button_top{
-                    @extend %button_top;
-                }
+            .button_top{
+                @extend %button_top;
+            }
+
+            &:hover .button_top{
+                transform: translateY(-0.33em);
+            }
+
+            &:active .button_top{
+                transform: translateY(0);
             }
         }
+        
     }
 }
 
@@ -63,11 +74,13 @@
 
             img{
                 width: 100%;
+                
             }
             div{
                 p{
-                    padding: 0px;
+                    padding: 30px;
                 }
+
             }
         }
     }

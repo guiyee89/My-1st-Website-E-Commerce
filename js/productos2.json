@@ -1,4 +1,4 @@
-{
+  {
     "travel": [
       {
         "id": "viaje-01",
@@ -58,7 +58,8 @@
         "cat": {
           "name": "Services",
           "id": "services"
-        }
+        },
+        "description1": "Several companies make plastic travel compression bags that help remove air from bulky clothing by rolling (no vacuum cleaner required). Travelers' reviews are mixed. Some say they're the best way to pack a suitcase, because you can pack much more and use the bags to hold dirty clothes on the way back.  You can even wash clothes in the bag if you add water and soap and then shake and massage it. Other reviewers warn that compression bags wrinkle thin fabrics, and they can make it easy to pack too much and end up with an overweight bag."
       },
       {
         "id": "servicio-02",
@@ -68,7 +69,9 @@
         "cat": {
           "name": "Services",
           "id": "services"
-        }
+        },
+        "description1": "The travel and hospitality industry has undergone a massive upheaval over the last year and a half. The major boom that the industry saw towards the start of the previous decade was hugely overturned by the coronavirus pandemic. Data from the US Travel Association found that in 2020, the travel sector lost $492 billion compared to 2019. That's a 42% annual decline! Further, international travel spending fell 76%, and corporate travel spending fell 70%."
+
       },
       {
         "id": "servicio-03",
@@ -78,7 +81,8 @@
         "cat": {
           "name": "Services",
           "id": "services"
-        }
+        },
+        "description1": "Our collection of more than 300 Extraordinary Places will take your trip to the next level. Look for the illustrations on our maps and read our takes on what make these places so special. We’ve been there, and we think you should go, too. Tell us where you want to go and what you'd like to see and do. Roadtrippers will help you find all the best stops along the way."
       },
       {
         "id": "servicio-04",
@@ -88,7 +92,8 @@
         "cat": {
           "name": "Services",
           "id": "services"
-        }
+        },
+        "description1": "A travel insurance policy can protect you from a variety of unexpected circumstances while you're traveling. Whether you're looking for trip cancellation coverage to reimburse you for the costs of hotels, flights and other pre-paid and non-refundable trip expenses or if you need medical expense coverage to protect you from the extensive costs of overseas treatment and hospitalization, a travel insurance policy can drastically decrease your risks."
       }
     ]
   }
