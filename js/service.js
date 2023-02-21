@@ -77,6 +77,23 @@ function addCart(e) {
 
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
 
+    Toastify({
+        text: "Added to Cart",
+        offset: {
+          x: 50,
+          y: 80,
+        },
+        duration: 3000,
+        close: true,
+        gravity: "bottom",
+        position: "left",
+        stopOnFocus: true,
+        style: {
+          background: "linear-gradient(to left, #000, #2e2c2c)",
+          borderRadius: "1rem",
+        },
+        onClick: function () { },
+      }).showToast();
 }
 
 function addQuantity() {
