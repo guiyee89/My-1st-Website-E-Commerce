@@ -17,7 +17,7 @@ if (cartLS) {
     addQuantity() 
 
 } else {
-    cart = [];
+    shoppingCart = [];
     
 }
 
@@ -69,10 +69,9 @@ function addCart(e) {
         existingProduct.quantity++;
         console.log(existingProduct)
     } else {
-        
         shoppingCart.push({ ...addedProduct, quantity: 1 });
     }
-
+    
     addQuantity()
 
     localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));

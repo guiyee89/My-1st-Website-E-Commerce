@@ -18,7 +18,7 @@ if (cartLS) {
     addQuantity() 
 
 } else {
-    cart = [];
+    shoppingCart = [];
     
 }
 
