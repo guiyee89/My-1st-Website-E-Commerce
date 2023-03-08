@@ -1,5 +1,15 @@
 @use "./variables";
 
+h2 {
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+}
+h3 {
+    padding: 15px;
+    text-align: center;
+}
+
 .grid_container_about{
     width: auto;
     margin: 20px 40px;
@@ -21,28 +31,44 @@
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                
+                
 
                 img {
                     width: 450px;
-                    padding: 15px;
+                    padding: 10px;
+                    
+                    
                 }
                 .about_img {
                     width: min(100% - 10px, 500px);
+                }
+                .img1{
+                    border-radius: 196px 90px 151px 55px;
+                    -webkit-border-radius: 196px 90px 151px 55px;
+                    -moz-border-radius: 196px 90px 151px 55px;
+                    transform: rotate(5deg) scale(1.1) skew(-4deg) translate(37px,0px);
+                    -webkit-transform: rotate(5deg) scale(1.1) skew(-4deg) translate(70px,-9px);
+                    
+                }
+                .img2{
+                    border-radius: 196px 90px 151px 55px;
+                    -webkit-border-radius: 48px 110px 92px 213px;
+                    -moz-border-radius: 196px 90px 151px 55px;
+                    border: 0px solid #ffffff;
+                    transform: rotate(5deg) scale(1.1) skew(-4deg) translate(37px, 0px);
+                    -webkit-transform: rotate(355deg) scale(1.1) skew(350deg) translate(15px, 2px);
                 }
             }
 
             .about_travel_buybutton {
 
-                    h2 {
-                        padding: 15px;
-                        font-weight: bold;
-                    }
-                    h3 {
-                        padding: 15px;
-                    }
                     p {
                         padding: 10px 120px;
                     }
+                    position: relative;
+                    right: 75px;
+                    bottom: 50px;
             }
         }
 }
@@ -50,6 +76,12 @@
 p {
     margin-top: 0;
     margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 570px){
+    .about_img{
+        width: 100%!important;
+    }
 }
 
 @media screen and (max-width: 1100px){
@@ -65,7 +97,7 @@ p {
         .grid_travel_col_1{
             .travel_img{
                 .about_img{
-                    width: 100%!important;
+                    width: 55%;
                 }
             }     
         }
@@ -82,5 +114,16 @@ p {
     }
     .grid_travel_col_1 {
         grid-column: span 2;
+    }
+}
+
+@media screen and (max-width: 1300px){
+    .about_travel_buybutton {
+
+        p {
+            padding: 10px 120px;
+        }
+        position: static!important;
+        
     }
 }
